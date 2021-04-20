@@ -1,2 +1,101 @@
 This Exp-2 is on to connect remote located system using Raspberry pi
 Demo Live for Exp-2: https://drive.google.com/file/d/1vU0ZzcZ1CS1G9NmrnB43vEBLpzZVNCOe/view?usp=sharing
+Accessing Graphical Desktop Of Raspberry Pi Using SSH And VNC
+Requriments:
+There are two things needed to configure the setup:
+1. Raspberry Pi with an SD card running Raspbian operating system (OS) and connected with Ethernet cable or WiFi.
+2. laptop running Linux OS—I prefer Ubuntu 16.04
+An IP address is required to get access to Raspberry Pi over Secure Socket Shell (SSH)
+What is SSH?
+SSH is a network protocol that provides the administrator with a secure way to access a remote computer.
+    On Raspberry pi system open terminal
+ To enable SSH, access command 
+ $ sudo raspi-config
+To find out the IP address assigned to Raspberry Pi 
+$ ifconfig (note down inet address for ex: 192.168.12.252 followed by Bcast address)
+An IP address is required to get access to Raspberry Pi over Secure Socket Shell (SSH)
+Accessing Raspberry Pi using SSH
+    On ubuntu open terminal
+$ ssh pi@192.168.12.252  (example ip address)
+Give your password
+    Otherwise On windows open putty
+1. give ip address 192.168.12.252
+2. login as:pi
+Pi@192.168.12.252 ’s password
+Accessing Raspberry Pi using VNC
+  check for advance doptions like resolution, output mode
+Installing required packages on Raspberry Pi
+Internet access is available on Raspberry Pi since Ubuntu connected to a Wi-Fi network has shared its connection over Ethernet. Run the following command to update the packages list from the repositories:
+
+$ sudo apt-get update
+
+Graphical desktop of Raspberry Pi can be shared using tightvncserver package. For that, run the following command:
+
+$ sudo apt-get install tightvncserver
+
+Installing required packages on Raspberry Pi
+
+Run the following command to perform the initial set up of tightvncserver:
+
+$ tightvncserver
+
+Enter a suitable password for future connections. Enter n for No to view only password.
+
+Run the following command to copy and paste from VNC server:
+
+$ sudo apt-get install autocutsel
+
+Add autocutsel -fork in /home/pi/.vnc/xstartup using the following command:
+
+$ sudo nano /home/pi/.vnc/xstartup
+
+Save it using Ctrl + x.
+
+Installing required packages on Raspberry Pi
+
+
+Contents of the modified xstartup file can be viewed using the following command:
+
+$ cat .vnc/xstartup
+
+Restart VNC server for autocutsel to take effect, using the following command:
+
+$ vncserver -kill :1 then command $
+ vncserver :1
+
+Installing required packages on ubuntu
+Accessing Raspberry Pi using VNC Viewer
+Although Raspberry Pi has the required packages installed to stream its graphical desktop, VNC Viewer is needed to access it. Since we are using an Ubuntu system to access Raspberry Pi, install VNC Viewer using the following command:
+
+$ sudo apt-get install ssvnc
+
+You may need to install xtightvncviewer using the following command:
+
+$ sudo apt-get install xtightvncviewer
+
+It is now possible to access the graphical desktop of Raspberry Pi using the following command:
+
+$ xtightvncviewer 192.168.12.252:1
+
+Installing required packages on ubuntu
+Accessing Raspberry Pi using VNC Viewer
+Although Raspberry Pi has the required packages installed to stream its graphical desktop, VNC Viewer is needed to access it. Since we are using an Ubuntu system to access Raspberry Pi, install VNC Viewer using the following command:
+
+$ sudo apt-get install ssvnc
+
+You may need to install xtightvncviewer using the following command:
+
+$ sudo apt-get install xtightvncviewer
+
+It is now possible to access the graphical desktop of Raspberry Pi using the following command:
+
+$ xtightvncviewer 192.168..130:1
+
+Replace 192.168.1.130 with the IP address of your Raspberry Pi. Enter the password to access it. Alternatively, the same results can be obtained using RealVNC Viewer package available on www.realvnc.com
+
+Raspberry Pi can be logged on over SSH using an Ethernet network with Ubuntu system. Graphical desktop of Raspberry Pi running VNC server can be accessed using VNC Viewer. Internet can be accessed on Raspberry Pi by sharing the Wi-Fi connection of Ubuntu system. This configuration lets you access Raspberry Pi from any remote location using a laptop and a regular Ethernet cable.
+
+Note that, vncserver does not start automatically when Raspberry Pi boots up. You need to start it using the command given below. Use SSH every time you want to access the graphical desktop of Raspberry Pi.
+
+$ vncserver :1
+
